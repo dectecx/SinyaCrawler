@@ -1,0 +1,7 @@
+{
+    "HttpOption": {
+        "Mode": "Release",
+        "Mock列表": "./Mock/列表.html",
+        "Mock資料": "./Mock/資料.html"
+    }
+}
