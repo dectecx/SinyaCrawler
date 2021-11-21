@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SinyaCrawler.Utility
 {
@@ -25,6 +26,19 @@ namespace SinyaCrawler.Utility
 
             //// 回傳Description Attribute的設定
             return ((DescriptionAttribute)customAttribute[0]).Description;
+        }
+
+        public static bool TryValidate(object contact, out List<ValidationResult> errors)
+        {
+            var context = new ValidationContext(contact, null, null);
+            errors = new List<ValidationResult>();
+            return Validator.TryValidateObject(contact, context, errors, true);
+        }
+
+        public static void Validate(object instance)
+        {
+            var context = new ValidationContext(instance, null, null);
+            Validator.ValidateObject(instance, context, true);
         }
     }
 }

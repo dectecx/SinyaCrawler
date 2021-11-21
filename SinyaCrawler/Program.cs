@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SinyaCrawler.Service;
 using SinyaCrawler.Service.Interface;
+using SinyaCrawler.Service.Model.LineNotify;
 
 namespace Program
 {
@@ -28,12 +29,13 @@ namespace Program
         {
             services.AddOptions();
             // DI Config
-            //services.Configure<HttpOption>(configuration.GetSection(nameof(HttpOption)));
+            services.Configure<LineNotifyOption>(configuration.GetSection(nameof(LineNotifyOption)));
             // DI Common
-            services.AddSingleton<HttpClient>();
+            services.AddTransient<HttpClient>();
             // DI Service
             services.AddTransient<CrawlerService>();
             services.AddTransient<SinyaService>();
+            services.AddTransient<LineNotifyService>();
             if (configuration.GetSection("HttpOption").GetValue<string>("Mode") == "Debug")
             {
                 //services.AddTransient<IHttpService, MockHttpService>();
